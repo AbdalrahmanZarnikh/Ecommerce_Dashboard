@@ -1,0 +1,149 @@
+/* ===== Tailwind ===== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  transition: all 0.3 ease-in-out;
+  -webkit-transition: all 0.3 ease-in-out;
+  -moz-transition: all 0.3 ease-in-out;
+  -ms-transition: all 0.3 ease-in-out;
+  -o-transition: all 0.3 ease-in-out;
+}
+
+div,
+span,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark {
+  font-family: "Outfit", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", serif;
+}
+
+:root {
+  --primary-color: #ff8d4c;
+  --dimGray-color: #b3b3b3;
+  --dimWhite-color: #fffcfa;
+  --dimBlack-color: #191919;
+}
+/* 
+body {
+  background: #fff5f0;
+} */
+
+/* ===scrollbar=== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #001e2138;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+/* === custom select text === */
+::-moz-selection {
+  color: var(--dimBlack-color);
+  background: var(--primary-color);
+}
+
+::selection {
+  color: var(--dimBlack-color);
+  background: var(--primary-color);
+}
+
+.line {
+  position: relative;
+}
+.line::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 200px !important;
+  background-color: red !important;
+}
+
+.fix-height {
+  min-height: calc(100vh - 70px);
+}
+.overflow-height {
+  height: calc(100vh - 70px);
+}
