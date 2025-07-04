@@ -5,7 +5,7 @@ import CategoryCard from "../../components/CategoryCard/CategoryCard";
 
 // Thunks
 
-import { getAllCategories } from "../../redux/slice/categories/categorySlice";
+import { getAllCategories ,deleteCategory} from "../../redux/slice/categories/categorySlice";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -37,6 +37,7 @@ const Categories: React.FC = () => {
             name={record.name}
             image={record.image?.url}
             updateTo="categories"
+            deleteAction={deleteCategory}
           />
         )}
         grid={true}

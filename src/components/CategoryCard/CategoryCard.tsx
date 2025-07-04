@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
-// Thunk
-import { deleteBrand } from "../../redux/slice/brands/brandSlice";
 
 // Component
 import Modal from "../Modal/Modal";
@@ -28,9 +26,10 @@ interface CategoryCardProps {
   name?: string;
   id?: string;
   updateTo:string,
+  deleteAction:any
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo}) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo,deleteAction}) => {
   // State For Modal To Open And Close
   const [open, setOpen] = useState(false);
 
@@ -47,7 +46,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo})
 
   // Function To Handle Delete Item
   const handleClickDelete = () => {
-    dispatch(deleteBrand(id as string));
+    dispatch(deleteAction(id as string));
     if (!error) {
       toast.success("item deleted successfully");
     } else {

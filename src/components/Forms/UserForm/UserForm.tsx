@@ -9,10 +9,7 @@ import "../Forms.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 // Thunks
-import {
-  addCategory,
-  updateCategory,
-} from "../../../redux/slice/categories/categorySlice";
+import { addUser, updateUser } from "../../../redux/slice/users/userSlice";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
@@ -20,27 +17,30 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 // React-Hot-Toast
 import toast from "react-hot-toast";
 import Loading from "../../common/Loading/Loading";
-import UploadImage from "../../common/uploadImage/UploadImage";
 
 // Types
 type Inputs = {
   name: string;
-  image: string;
+  email?: string;
+  password: string;
+  role: string;
 };
 
-const CategoryForm: React.FC = () => {
+const UserForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
 
   // Info From Slice
   const { records, isLoading, error } = useAppSelector(
-    (state) => state.categorySlice
+    (state) => state.userSlice
   );
 
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
 
   const isUpdateMode = typeof id === "string";
 
@@ -49,6 +49,8 @@ const CategoryForm: React.FC = () => {
       const record = records.find((item) => item._id === id);
       if (record) {
         setName(record.name);
+        setEmail(record.email);
+        setRole(record.role);
       }
     }
   }, [id, isUpdateMode, records]);
@@ -61,32 +63,35 @@ const CategoryForm: React.FC = () => {
     reset,
   } = useForm<Inputs>({
     defaultValues: {
-      name
+      name,
+      email,
+      role,
     },
   });
 
   useEffect(() => {
-    reset({ name });
-  }, [name, reset]);
+    reset({ name, role, email });
+  }, [name, email, role, reset]);
 
   // Function To Handle Submit
-  const form = new FormData();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    form.append("name", data.name);
-
+    
+    if(isUpdateMode && data.email===email){
+      delete data.email;
+    }
 
     const action = isUpdateMode
-      ? updateCategory({ id: id, data: form })
-      : addCategory(form);
+      ? updateUser({ id: id, data })
+      : addUser(data);
 
     dispatch(action).then(() => {
       if (error) {
         toast.error("Please Try Again");
-      } else {
+      } else if(isLoading=="Success") {
         toast.success(
           isUpdateMode ? "Update Successful" : "Addition Successful"
         );
-        navigate("/categories");
+        navigate("/users");
       }
     });
   };
@@ -100,16 +105,49 @@ const CategoryForm: React.FC = () => {
           <input
             id="Name"
             type="text"
-            placeholder="ادخل اسم ..."
+            placeholder="ادخل الاسم .."
             {...register("name", { required: "The Name is Required" })}
           />
           {errors.name && (
             <span className="text-red-400">{errors.name.message}</span>
           )}
         </div>
-
-
-        <UploadImage form={form} type="image" records={records} />
+        <div className="form-group">
+          <label htmlFor="ُEmail">البريد الاكتروني</label>
+          <input
+            id="ُEmail"
+            type="email"
+            placeholder="ادخل البريد الاكتروني ..."
+            {...register("email", { required: "The Email is Required" })}
+          />
+          {errors.name && (
+            <span className="text-red-400">{errors.name.message}</span>
+          )}
+        </div>
+        <div className="form-group">
+          <label htmlFor="Password">كلمة المرور</label>
+          <input
+            id="Password"
+            type="password"
+            placeholder="ادخل كلمة مرور "
+            {...register("password", { required: "The Password is Required" })}
+          />
+          {errors.name && (
+            <span className="text-red-400">{errors.name.message}</span>
+          )}
+        </div>
+        <div className="form-group">
+          <label htmlFor="Role">نوع الحساب</label>
+          <input
+            id="Role"
+            type="text"
+            placeholder="ادخل نوع الحساب اما user او admin "
+            {...register("role", { required: "The Role is Required" })}
+          />
+          {errors.name && (
+            <span className="text-red-400">{errors.name.message}</span>
+          )}
+        </div>
 
         <button type="submit" className="submit-button">
           {typeof id == "string" ? "تعديل" : "اضافة"}
@@ -119,4 +157,4 @@ const CategoryForm: React.FC = () => {
   );
 };
 
-export default CategoryForm;
+export default UserForm;

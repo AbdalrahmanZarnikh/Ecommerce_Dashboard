@@ -100,7 +100,7 @@ const BrandForm: React.FC = () => {
           <input
             id="Name"
             type="text"
-            placeholder="Enter Name"
+            placeholder="ادخل اسم .."
             {...register("name", { required: "The Name is Required" })}
           />
           {errors.name && (
@@ -112,7 +112,7 @@ const BrandForm: React.FC = () => {
         <UploadImage form={form} type="image" records={records} />
 
         <button type="submit" className="submit-button">
-          {typeof id == "string" ? "UPDATE" : "ADD"}
+          {typeof id == "string" ? "تعديل" : "اضافة"}
         </button>
       </form>
     </Loading>

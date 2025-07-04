@@ -90,7 +90,7 @@ const UserCard: React.FC<UserCardProps> = ({
       </div>
       <div className="profile flex flex-col">
         <p> <span className="font-bold">الاسم :</span> {name}</p>
-        <p> <span className="font-bold">االبريد الاكتروني :</span> {email}</p>
+        <p> <span className="font-bold">البريد الاكتروني :</span> {email}</p>
         <p> <span className="font-bold">نوع الحساب :</span> {role}</p>
 
 
