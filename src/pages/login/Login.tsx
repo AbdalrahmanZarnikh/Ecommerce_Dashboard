@@ -31,7 +31,7 @@ const Login = () => {
 
      if(Auth.fulfilled.match(result) && result.payload.data.role==="admin"){
        
-       navigate("/",{replace:true})
+       navigate("/categories",{replace:true})
      }
 
 
