@@ -15,17 +15,19 @@ const MainContent = ({ status, error, children, to }: TProps) => {
   const navigate = useNavigate();
   return (
     <Loading status={status} error={error}>
-      <div className="p-11">
-        <button
-          className={`${styles.btn} mb-4`}
-          onClick={() => {
-            navigate(`/${to}/add`);
-          }}
-        >
-          <RiAddCircleLine/>
-        </button>
-        {children}
-      </div>
+      {to === "orders" ? null : (
+        <div className="p-11">
+          <button
+            className={`${styles.btn} mb-4`}
+            onClick={() => {
+              navigate(`/${to}/add`);
+            }}
+          >
+            <RiAddCircleLine />
+          </button>
+        </div>
+      )}
+      {children}
     </Loading>
   );
 };

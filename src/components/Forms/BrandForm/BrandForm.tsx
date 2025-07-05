@@ -34,7 +34,7 @@ const BrandForm: React.FC = () => {
   const { id } = useParams();
 
   // Info From Slice
-  const { records, isLoading, error } = useAppSelector(
+  const { brands, isLoading, error } = useAppSelector(
     (state) => state.brandSlice
   );
 
@@ -46,12 +46,12 @@ const BrandForm: React.FC = () => {
 
   useEffect(() => {
     if (isUpdateMode) {
-      const record = records.find((item) => item._id === id);
+      const record = brands.find((item) => item._id === id);
       if (record) {
         setName(record.name);
       }
     }
-  }, [id, isUpdateMode, records]);
+  }, [id, isUpdateMode, brands]);
 
   // Hook-Form
   const {
@@ -109,7 +109,7 @@ const BrandForm: React.FC = () => {
         </div>
 
 
-        <UploadImage form={form} type="image" records={records} />
+        <UploadImage form={form} type="image" records={brands} />
 
         <button type="submit" className="submit-button">
           {typeof id == "string" ? "تعديل" : "اضافة"}

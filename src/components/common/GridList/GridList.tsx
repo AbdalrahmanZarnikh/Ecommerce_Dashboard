@@ -28,7 +28,7 @@ const GridList = <T,>({ records, renderItems, grid }: TGridListProps<T>) => {
     );
   return (
     <div
-      className={`${grid && flag ? "grid  gap-4 xs:grid-cols-1 md:grid-cols-2 " : ""}`}
+      className={`${grid && flag ? "grid  gap-4 xs:grid-cols-1 md:grid-cols-2    " : ""}`}
     >
       {List}
     </div>

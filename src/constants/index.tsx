@@ -5,6 +5,8 @@ import Categories from "../pages/categories/Categories";
 import Brands from "../pages/brands/Brands";
 import Users from "../pages/users/Users";
 import { FaUser } from "react-icons/fa";
+import Products from "../pages/products/Products";
+import Orders from "../pages/orders/Orders";
 
 export const DashBoardLinks = [
   {
@@ -19,11 +21,22 @@ export const DashBoardLinks = [
     icon: <MdBrandingWatermark />,
     childComponente: <Brands />,
   },
-    {
+  {
     path: "/users",
     label: "المستخدمين",
     icon: <FaUser />,
     childComponente: <Users />,
   },
-
+  {
+    path: "/products",
+    label: "المنتجات",
+    icon: <FaUser />,
+    childComponente: <Products />,
+  },
+  {
+    path: "/orders",
+    label: "الطلبات",
+    icon: <FaUser />,
+    childComponente: <Orders />,
+  },
 ];

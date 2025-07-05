@@ -20,21 +20,16 @@ const UploadImage = ({ form, type, records }: TProps) => {
   const isUpdateMode = typeof id === "string";
 
   
+useEffect(() => {
+  if (isUpdateMode && Array.isArray(records) && id) {
+    const record = records.find((item: any) => item._id === id);
 
-  useEffect(() => {
-    if (isUpdateMode) {
-      const record = records.find((item: any) => item._id === id);
-      if (record.photo) {
-        setImage(record.photo?.url!);
-      }
-      else if(record.image){
-        setImage(record.image?.url!);
-      }
-      else{
-        setImage(record.icon?.url!);
-      }
+    if (record && record[type] && record[type].url) {
+      setImage(record[type].url);
     }
-  }, [id, isUpdateMode, records]);
+  }
+}, [id, isUpdateMode, records, type]);
+
 
   return (
     <div className="flex justify-center items-center cursor-pointer">
@@ -50,7 +45,7 @@ const UploadImage = ({ form, type, records }: TProps) => {
           ) : (
             <div className="w-full h-full flex flex-col justify-center items-center">
               <AiOutlineCloudUpload size={60} className="text-[#FF8D4C]" />
-              اضغط هنا لرفع صورة
+              Browse Image To Upload
             </div>
           )}
         </div>

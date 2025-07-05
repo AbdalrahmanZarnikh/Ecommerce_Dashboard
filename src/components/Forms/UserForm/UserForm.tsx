@@ -120,8 +120,8 @@ const UserForm: React.FC = () => {
             placeholder="ادخل البريد الاكتروني ..."
             {...register("email", { required: "The Email is Required" })}
           />
-          {errors.name && (
-            <span className="text-red-400">{errors.name.message}</span>
+          {errors.email && (
+            <span className="text-red-400">{errors.email.message}</span>
           )}
         </div>
         <div className="form-group">
@@ -132,8 +132,8 @@ const UserForm: React.FC = () => {
             placeholder="ادخل كلمة مرور "
             {...register("password", { required: "The Password is Required" })}
           />
-          {errors.name && (
-            <span className="text-red-400">{errors.name.message}</span>
+          {errors.password && (
+            <span className="text-red-400">{errors.password.message}</span>
           )}
         </div>
         <div className="form-group">
@@ -144,8 +144,8 @@ const UserForm: React.FC = () => {
             placeholder="ادخل نوع الحساب اما user او admin "
             {...register("role", { required: "The Role is Required" })}
           />
-          {errors.name && (
-            <span className="text-red-400">{errors.name.message}</span>
+          {errors.role && (
+            <span className="text-red-400">{errors.role.message}</span>
           )}
         </div>
 

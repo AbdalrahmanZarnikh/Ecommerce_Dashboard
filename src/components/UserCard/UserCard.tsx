@@ -74,7 +74,7 @@ const UserCard: React.FC<UserCardProps> = ({
     >
       <div className="flex justify-end items-center  gap-3 mb-2">
         <button
-          className="text-4xl  text-white hover:bg-red-400 bg-[#FF8D4C] p-2 rounded-lg"
+          className="text-2xl  text-white hover:bg-red-400 bg-[#FF8D4C] p-2 rounded-lg"
           onClick={handleClickUpdate}
         >
           <MdEdit />
@@ -83,7 +83,7 @@ const UserCard: React.FC<UserCardProps> = ({
           onClick={() => {
             setOpen(true);
           }}
-          className="text-4xl text-white hover:bg-red-400 bg-red-600 p-2 rounded-lg"
+          className="text-2xl text-white hover:bg-red-400 bg-red-600 p-2 rounded-lg"
         >
           <RiDeleteBin6Line />
         </button>

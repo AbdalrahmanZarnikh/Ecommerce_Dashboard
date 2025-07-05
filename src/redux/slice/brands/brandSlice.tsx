@@ -15,14 +15,14 @@ import  addBrand from "./act/addBrand"
 }
 
 type TState = {
-  records: TRecord[];
+  brands: TRecord[];
   isLoading: "Idle" | "Pending" | "Fail" | "Success";
   error: string | null;
 };
 
 // State
 const initialState: TState = {
-  records: [],
+  brands: [],
   isLoading: "Idle",
   error: null,
 };
@@ -44,7 +44,7 @@ const brandSlice = createSlice({
     builder.addCase(getAllBrands.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records = action.payload;
+      state.brands = action.payload;
     });
     builder.addCase(getAllBrands.rejected, (state,action) => {
       state.isLoading = "Fail";
@@ -57,7 +57,7 @@ const brandSlice = createSlice({
     builder.addCase(addBrand.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records.push(action.payload);
+      state.brands.push(action.payload);
     });
     builder.addCase(addBrand.rejected, (state,action) => {
       state.isLoading = "Fail";
@@ -70,7 +70,7 @@ const brandSlice = createSlice({
     builder.addCase(updateBrand.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records = state.records.map((record) =>
+      state.brands = state.brands.map((record) =>
         record._id === action.payload._id ? action.payload : record
       );
     });
@@ -85,7 +85,7 @@ const brandSlice = createSlice({
     builder.addCase(deleteBrand.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records=state.records.filter((item)=>item._id!==action.payload);
+      state.brands=state.brands.filter((item)=>item._id!==action.payload);
     });
     builder.addCase(deleteBrand.rejected, (state,action) => {
       state.isLoading = "Fail";

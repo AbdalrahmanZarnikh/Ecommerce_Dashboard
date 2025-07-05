@@ -1,13 +1,8 @@
-
-// Styles
-import styles from "../../styles";
-
 // Router-Dom
 import { useNavigate } from "react-router-dom";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-
 
 // Component
 import Modal from "../Modal/Modal";
@@ -19,18 +14,31 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { deleteProduct } from "../../redux/slice/product/productSlice";
 
 // Types
-interface CategoryCardProps {
-  image?: string;
-  name?: string;
+interface ProductCardProps {
+  title?: string;
   id?: string;
-  updateTo:string,
-  deleteAction:any
+  description: string | undefined;
+  image?: string;
+  images?: { url: string; public_id: string }[];
+  price?: number;
+  category?: { _id: string; name: string };
+  brand?: { _id: string; name: string };
+  quantity: number;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo,deleteAction}) => {
-  // State For Modal To Open And Close
+const ProductCard: React.FC<ProductCardProps> = ({
+  title,
+  category,
+  price,
+  image,
+  images,
+  brand,
+  id,
+  quantity,
+}) => {
   const [open, setOpen] = useState(false);
 
   // Check Error From Slice
@@ -41,12 +49,12 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo,d
 
   // Function To Handle Navigation To Update Page
   const handleClickUpdate = () => {
-    navigate(`/${updateTo}/update/${id}`);
+    navigate(`/products/update/${id}`);
   };
 
   // Function To Handle Delete Item
   const handleClickDelete = () => {
-    dispatch(deleteAction(id as string));
+    dispatch(deleteProduct(id as string));
     if (!error) {
       toast.success("item deleted successfully");
     } else {
@@ -55,9 +63,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo,d
   };
 
   return (
-    <div
-      className={`TestimonialsCard ${styles.cardStyle} xs:p-4 md:p-12  h-full`}
-    >
+    <div className="max-w-sm border rounded-lg p-4 shadow-sm bg-white">
       <div className="flex justify-end items-center  gap-3 mb-2">
         <button
           className="text-2xl  text-white hover:bg-red-400 bg-[#FF8D4C] p-2 rounded-lg"
@@ -74,17 +80,37 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo,d
           <RiDeleteBin6Line />
         </button>
       </div>
-      <div className="profile text-center">
-        <img
-          src={image}
-          alt={name}
-          className="w-24 h-24 rounded-full mx-auto md:mb-3 mb-2 bg-Orange_97 border border-black"
-        />
-        <span className="text-Grey_15 font-semibold md:text-[24px] text-[20px]">
-          {name}
-        </span>
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-48 object-cover rounded-md"
+      />
+
+      <div className="flex justify-between items-center">
+        <div className="mt-4">
+          <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
+          <p className="text-sm text-gray-500">{category?.name}</p>
+          <p className="text-sm text-gray-400">{brand?.name}</p>
+          <p className="text-green-600 font-bold mt-1">${price}</p>
+        </div>
+
+        <div>
+          {images && images.length > 0 && (
+            <div className="flex gap-2 mt-4 overflow-x-auto">
+              {images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img.url}
+                  alt={`preview-${index}`}
+                  className="w-14 h-14 object-cover rounded border"
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
+      <p>{quantity}</p>
       {/* Modal Component To Show When Click On Delete Button */}
       <Modal
         open={open}
@@ -95,4 +121,4 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ image, name, id ,updateTo,d
   );
 };
 
-export default CategoryCard;
+export default ProductCard;

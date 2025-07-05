@@ -18,7 +18,7 @@ const Categories: React.FC = () => {
   const dispatch = useAppDispatch();
 
   // Info From Slice
-  const { records, isLoading, error } = useAppSelector(
+  const { brands, isLoading, error } = useAppSelector(
     (state) => state.brandSlice
   );
 
@@ -30,7 +30,7 @@ const Categories: React.FC = () => {
   return (
     <MainContent status={isLoading} error={error} to="brands">
       <GridList
-        records={records}
+        records={brands}
         renderItems={(record) => (
           <CategoryCard
             id={record._id}

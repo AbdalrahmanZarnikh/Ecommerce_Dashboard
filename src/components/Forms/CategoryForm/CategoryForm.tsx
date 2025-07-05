@@ -34,7 +34,7 @@ const CategoryForm: React.FC = () => {
   const { id } = useParams();
 
   // Info From Slice
-  const { records, isLoading, error } = useAppSelector(
+  const { categories, isLoading, error } = useAppSelector(
     (state) => state.categorySlice
   );
 
@@ -46,12 +46,12 @@ const CategoryForm: React.FC = () => {
 
   useEffect(() => {
     if (isUpdateMode) {
-      const record = records.find((item) => item._id === id);
+      const record = categories.find((item) => item._id === id);
       if (record) {
         setName(record.name);
       }
     }
-  }, [id, isUpdateMode, records]);
+  }, [id, isUpdateMode, categories]);
 
   // Hook-Form
   const {
@@ -109,7 +109,7 @@ const CategoryForm: React.FC = () => {
         </div>
 
 
-        <UploadImage form={form} type="image" records={records} />
+        <UploadImage form={form} type="image" records={categories} />
 
         <button type="submit" className="submit-button">
           {typeof id == "string" ? "تعديل" : "اضافة"}

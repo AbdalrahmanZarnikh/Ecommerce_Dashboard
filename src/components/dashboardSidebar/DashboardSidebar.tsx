@@ -6,12 +6,12 @@ import { DashBoardLinks } from "../../constants/index";
 import { useState } from "react";
 
 const DashboardSidebar = () => {
-  const [selectLink, setselectLink] = useState("benefits");
+  const [selectLink, setselectLink] = useState("categories");
   return (
     <>
       <Link to="/categories" className="flex items-center font-semibold">
         <CgMenuGridR className="text-3xl text-black me-1" />
-        <span className="hidden lg:block text-3xl text-black">Dashboard</span>
+        <span className="hidden lg:block text-3xl text-black">لوحة التحكم</span>
       </Link>
       <ul className="mt-10 flex items-center justify-center flex-col lg:items-start">
         {DashBoardLinks.map((item, index) => {

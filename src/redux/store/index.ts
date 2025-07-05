@@ -6,13 +6,17 @@ import categorySlice from "../slice/categories/categorySlice";
 import authSlice from "../slice/auth/authSlice"
 import brandSlice from "../slice/brands/brandSlice"
 import userSlice from "../slice/users/userSlice"
+import productSlice from "../slice/product/productSlice"
+import orderSlice from "../slice/orders/orderSlice"
 
 export const store = configureStore({
   reducer: {
     categorySlice,
     authSlice,
     brandSlice,
-    userSlice
+    userSlice,
+    productSlice,
+    orderSlice
   },
 });
 

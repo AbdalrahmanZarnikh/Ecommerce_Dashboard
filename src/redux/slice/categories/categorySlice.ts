@@ -15,14 +15,14 @@ export interface TRecord {
 }
 
 type TState = {
-  records: TRecord[];
+  categories: TRecord[];
   isLoading: "Idle" | "Pending" | "Fail" | "Success";
   error: string | null;
 };
 
 // State
 const initialState: TState = {
-  records: [],
+  categories: [],
   isLoading: "Idle",
   error: null,
 };
@@ -44,7 +44,7 @@ const categorySlice = createSlice({
     builder.addCase(getAllCategories.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records = action.payload;
+      state.categories = action.payload;
     });
     builder.addCase(getAllCategories.rejected, (state,action) => {
       state.isLoading = "Fail";
@@ -57,7 +57,7 @@ const categorySlice = createSlice({
     builder.addCase(addCategory.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records.push(action.payload);
+      state.categories.push(action.payload);
     });
     builder.addCase(addCategory.rejected, (state,action) => {
       state.isLoading = "Fail";
@@ -70,7 +70,7 @@ const categorySlice = createSlice({
     builder.addCase(updateCategory.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records = state.records.map((record) =>
+      state.categories = state.categories.map((record) =>
         record._id === action.payload._id ? action.payload : record
       );
     });
@@ -85,7 +85,7 @@ const categorySlice = createSlice({
     builder.addCase(deleteCategory.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records=state.records.filter((item)=>item._id!==action.payload);
+      state.categories=state.categories.filter((item)=>item._id!==action.payload);
     });
     builder.addCase(deleteCategory.rejected, (state,action) => {
       state.isLoading = "Fail";

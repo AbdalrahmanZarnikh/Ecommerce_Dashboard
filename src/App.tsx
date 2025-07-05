@@ -11,6 +11,7 @@ import CategoryForm from "./components/Forms/CategoryForm/CategoryForm";
 import Login from "./pages/login/Login";
 import BrandForm from "./components/Forms/BrandForm/BrandForm";
 import UserForm from "./components/Forms/UserForm/UserForm";
+import ProductForm from "./components/Forms/ProductForm/ProductForm";
 function App() {
   return (
     <>
@@ -65,6 +66,22 @@ function App() {
             element={
               <NewItem>
                 <UserForm />
+              </NewItem>
+            }
+          />
+          <Route
+            path="/products/add"
+            element={
+              <NewItem>
+                <ProductForm />
+              </NewItem>
+            }
+          />
+          <Route
+            path="/products/update/:id"
+            element={
+              <NewItem>
+                <ProductForm />
               </NewItem>
             }
           />
