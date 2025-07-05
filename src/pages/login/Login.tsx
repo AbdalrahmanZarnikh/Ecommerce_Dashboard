@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {Auth} from "../../redux/slice/auth/authSlice"
-import toast, { Toaster } from "react-hot-toast";
-import { replace, useNavigate } from "react-router-dom";
+import  { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import loading from "../../services/loading.json"
 
@@ -16,7 +16,7 @@ const Login = () => {
    const navigate=useNavigate()
   const dispatch = useAppDispatch()
 
-  const {error,isLoading}=useAppSelector(state=>state.authSlice)
+  const {isLoading}=useAppSelector(state=>state.authSlice)
 
     // Hook-Form
     const {

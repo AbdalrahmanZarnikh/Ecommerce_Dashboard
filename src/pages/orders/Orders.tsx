@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "../../components/dashboardNav/header.module.css"
 
 // Components
 import GridList from "../../components/common/GridList/GridList";

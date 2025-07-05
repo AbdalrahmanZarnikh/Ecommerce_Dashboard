@@ -7,7 +7,7 @@ const deleteUser = createAsyncThunk(
       const { rejectWithValue } = thunkAPI;
       try {
         const token=localStorage.getItem("token");
-        const res = await axios.delete(
+          await axios.delete(
           `/api/users/${id}`,{
             headers:{
               Authorization:`Bearer ${token}`

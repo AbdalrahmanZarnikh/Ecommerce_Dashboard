@@ -37,13 +37,16 @@ type Inputs = {
   quantity: number;
 };
 
+type Category = { _id: string; name: string };
+type Brand = { _id: string; name: string };
+
 const ProductForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [brands, setBrands] = useState<Brand[]>([]);
 
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   // Info From Slice
   const { records, isLoading, error } = useAppSelector(
@@ -101,12 +104,12 @@ const ProductForm: React.FC = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     form.append("title", data.title);
     form.append("description", data.description);
-    form.append("price", data.price);
     form.append("category", data.category);
     if (brands.length > 0) {
       form.append("brand", data.brand);
     }
-    form.append("quantity", data.quantity);
+    form.append("price", data.price.toString());
+    form.append("quantity", data.quantity.toString());
 
     const action = isUpdateMode
       ? updateProduct({ id: id, data: form })
@@ -222,7 +225,7 @@ const ProductForm: React.FC = () => {
         )}
 
         <UploadImage form={form} type="image" records={records} />
-        <UploadMultipleImages form={form} records={records}/>
+        <UploadMultipleImages form={form} records={records} />
 
         <button type="submit" className="submit-button">
           {typeof id == "string" ? "تعديل" : "اضافة"}
