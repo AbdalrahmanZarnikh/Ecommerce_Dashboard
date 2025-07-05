@@ -1,4 +1,3 @@
-import styles from "../../styles";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { MdDone,  } from "react-icons/md";
@@ -60,7 +59,7 @@ const OrderCard: React.FC<OrderCardProps> = ({
 
 
   return (
-    <div className={`TestimonialsCard ${styles.cardStyle} xs:p-4 md:p-8 ${isPaid ? "bg-green-500" : "bg-orange-500"}`}>
+    <div className={`TestimonialsCard rounded-lg shadow-lg text-white font-bold  xs:p-4 md:p-8  ${isPaid ? "bg-green-500" : "bg-orange-500"}`}>
       <div className={`flex justify-end gap-3 mb-2 ${isPaid && "hidden"}`}>
         <button
           className="text-2xl text-white hover:bg-red-400 bg-gray-700 p-2 rounded-lg"
@@ -70,23 +69,23 @@ const OrderCard: React.FC<OrderCardProps> = ({
         </button>
       </div>
 
-      <div className="space-y-2 text-sm">
-        <p><span className="font-bold">المستخدم:</span> {user?.name}</p>
-        <p><span className="font-bold">طريقة الدفع:</span> {paymentMethod}</p>
-        <p><span className="font-bold">تم الدفع:</span> {isPaid ? "نعم" : "لا"}</p>
-        {isPaid && <p><span className="font-bold">تاريخ الدفع:</span> {new Date(paidAt).toLocaleDateString()}</p>}
-        <p><span className="font-bold">شركة الحوالة:</span> {hawalaCompany}</p>
-        <p><span className="font-bold">السعر الكلي:</span> {totalOrderPrice} ل.س</p>
-        {taxPrice && <p><span className="font-bold">الضريبة:</span> {taxPrice} ل.س</p>}
+      <div className="space-y-2 text-xl">
+        <p><span className="font-bold text-black">المستخدم:</span> {user?.name}</p>
+        <p><span className="font-bold text-black">طريقة الدفع:</span> {paymentMethod}</p>
+        <p><span className="font-bold text-black">تم الدفع:</span> {isPaid ? "نعم" : "لا"}</p>
+        {isPaid && <p><span className="font-bold text-black">تاريخ الدفع:</span> {new Date(paidAt).toLocaleDateString()}</p>}
+        <p><span className="font-bold text-black">شركة الحوالة:</span> {hawalaCompany}</p>
+        <p><span className="font-bold text-black">السعر الكلي:</span> {totalOrderPrice} ل.س</p>
+         <p><span className="font-bold text-black">الضريبة:</span> {taxPrice} ل.س</p>
 
         <div className="mt-2">
-          <h3 className="font-bold">العنوان:</h3>
+          <h3 className="font-bold text-black">العنوان:</h3>
           <p>{shippingAddress.city} - {shippingAddress.details}</p>
           <p> {shippingAddress.phone}</p>
         </div>
 
         <div className="mt-2">
-          <h3 className="font-bold">المنتجات:</h3>
+          <h3 className="font-bold text-black">المنتجات:</h3>
           <ul className="list-disc list-inside">
             {cartItems.map((item, index) => (
               <li key={index}>

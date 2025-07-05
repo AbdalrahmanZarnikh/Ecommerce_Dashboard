@@ -27,9 +27,14 @@ const Login = () => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
      
-      await dispatch(Auth(data))
+     const result= await dispatch(Auth(data))
 
-      navigate("/",{replace:true})
+     if(Auth.fulfilled.match(result) && result.payload.data.role==="admin"){
+       
+       navigate("/",{replace:true})
+     }
+
+
     
     };
 

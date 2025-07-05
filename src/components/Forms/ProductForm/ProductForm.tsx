@@ -151,6 +151,7 @@ const ProductForm: React.FC = () => {
             placeholder="ادخل وصف ..."
             {...register("description", {
               required: "The Description is Required",
+              minLength:15
             })}
           />
           {errors.description && (
@@ -231,7 +232,7 @@ const ProductForm: React.FC = () => {
           {typeof id == "string" ? "تعديل" : "اضافة"}
         </button>
       </form>
-      ش
+      
     </Loading>
   );
 };
