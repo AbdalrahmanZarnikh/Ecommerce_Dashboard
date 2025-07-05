@@ -148,7 +148,7 @@ const ProductForm: React.FC = () => {
           <input
             id="Description"
             type="text"
-            placeholder="ادخل وصف ..."
+            placeholder="ادخل وصف ...."
             {...register("description", {
               required: "The Description is Required",
               minLength:15
