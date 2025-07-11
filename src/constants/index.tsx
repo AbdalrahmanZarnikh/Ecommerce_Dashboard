@@ -7,6 +7,7 @@ import Users from "../pages/users/Users";
 import { FaUser } from "react-icons/fa";
 import Products from "../pages/products/Products";
 import Orders from "../pages/orders/Orders";
+import Coupons from "../pages/coupons/Coupons";
 
 export const DashBoardLinks = [
   {
@@ -39,4 +40,11 @@ export const DashBoardLinks = [
     icon: <FaUser />,
     childComponente: <Orders />,
   },
+    {
+    path: "/coupons",
+    label: "كود الخصم",
+    icon: <FaUser />,
+    childComponente: <Coupons />,
+  },
+
 ];
