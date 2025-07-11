@@ -9,10 +9,10 @@ const DashBoardLayout = () => {
       <DashboardNav />
       <Toaster />
       <div className="overflow-height flex items-start justify-between overflow-hidden">
-        <div className="overflow-height  lg:w-1/7 hidden sm:block bg-blue-400 text-white p-1 lg:p-5">
+        <div className="overflow-height  lg:w-2/12 hidden sm:block bg-orange-300 text-black ">
           <DashboardSidebar />
         </div>
-        <div className="overflow-height w-full lg:w-4/5 overflow-y-scroll bg-white    ">
+        <div className="overflow-height w-full lg:w-10/12 overflow-y-scroll bg-orange-100   p-5 ">
           <Outlet />
         </div>
       </div>

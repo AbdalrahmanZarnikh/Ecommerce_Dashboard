@@ -10,10 +10,9 @@ const DashboardSidebar = () => {
   return (
     <>
       <Link to="/categories" className="flex items-center font-semibold">
-        <CgMenuGridR className="text-3xl text-black me-1" />
-        <span className="hidden lg:block text-3xl text-black">لوحة التحكم</span>
+        <span className="hidden lg:block text-3xl  mx-auto bg-orange-700 text-white p-4 w-full text-center ">لوحة التحكم</span>
       </Link>
-      <ul className="mt-10 flex items-center justify-center flex-col lg:items-start">
+      <ul className="mt-10 flex items-center justify-center flex-col lg:items-start p-5">
         {DashBoardLinks.map((item, index) => {
           if (item.path == "login" || item.path == "register") {
             return;
@@ -23,10 +22,10 @@ const DashboardSidebar = () => {
               key={index}
               onClick={() => setselectLink(item.path)}
               className={`flex items-center w-full p-2 rounded-md text-xl mb-3 lg:border-b
-                 border-gray-300 hover:border-yellow-200 hover:bg-Orange_70 hover:text-black transition
+                 border-gray-300 hover:border-yellow-200 hover:bg-orange-700  hover:text-white transition-all duration-200
                  ${
                    item.path == selectLink
-                     ? "bg-Orange_70 text-black"
+                     ? "bg-orange-700 text-white"
                      : "bg-Orange_85 "
                  }
                  `}

@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div>
-        <h1 className="text-blue-700 font-bold text-4xl">متجري</h1>
+        <h1 className="hidden md:block text-blue-700 font-bold text-4xl">متجري</h1>
         <div className={`${styles.menu} block sm:hidden`}>
           {toggle ? (
             <IoMdClose onClick={() => setToggle((prev) => !prev)} />

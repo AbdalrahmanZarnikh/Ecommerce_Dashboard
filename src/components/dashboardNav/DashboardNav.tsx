@@ -13,7 +13,7 @@ const DashboardNav = () => {
       <Navbar />
       <div className={styles.right}>
       <>
-            <strong className="text-blue-800 md:text-xl capitalize">
+            <strong className="text-orange-700 md:text-xl capitalize">
               {name}
             </strong>
             <button
