@@ -80,8 +80,8 @@ const OrderCard: React.FC<OrderCardProps> = ({
 
         <div className="mt-2">
           <h3 className="font-bold text-black">العنوان:</h3>
-          <p>{shippingAddress.city} - {shippingAddress.details}</p>
-          <p> {shippingAddress.phone}</p>
+          <p>{shippingAddress?.city} - {shippingAddress?.details}</p>
+          <p> {shippingAddress?.phone}</p>
         </div>
 
         <div className="mt-2">
@@ -89,7 +89,7 @@ const OrderCard: React.FC<OrderCardProps> = ({
           <ul className="list-disc list-inside">
             {cartItems.map((item, index) => (
               <li key={index}>
-                {item?.product?.title || " "} - الكمية: {item.quantity} - السعر: {item.price} ل.س
+                {item?.product?.title || " "} - الكمية: {item?.quantity} - السعر: {item.price} ل.س
                 {item.color && <> - اللون: {item.color}</>}
               </li>
             ))}
