@@ -5,7 +5,7 @@ import CouponCard from "../../components/CouponCard/CouponCard";
 
 // Thunks
 
-import { getAllCoupons} from "../../redux/slice/coupons/couponSlice";
+import { getAllCoupons,getCouponsSearch} from "../../redux/slice/coupons/couponSlice";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -28,7 +28,7 @@ const Coupons: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <MainContent status={isLoading} error={error} to="coupons">
+    <MainContent status={isLoading} error={error} to="coupons" getBySearch={getCouponsSearch} getAll={getAllCoupons}>
       <GridList
         records={records}
         renderItems={(record) => (

@@ -1,17 +1,17 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-// Thunks 
-import deleteBrand from "./act/deleteBrand"; 
-import getAllBrands from "./act/getAllBrands"
-import  updateBrand from "./act/updateBrand"
-import  addBrand from "./act/addBrand"
+// Thunks
+import deleteBrand from "./act/deleteBrand";
+import getAllBrands from "./act/getAllBrands";
+import updateBrand from "./act/updateBrand";
+import addBrand from "./act/addBrand";
+import getBrandsSearch from "./act/getBrandsSearch";
 
 // Types
- interface TRecord {
+interface TRecord {
   _id?: string;
   name: string;
-  image?: {url:string,public_id:string};
+  image?: { url: string; public_id: string };
 }
 
 type TState = {
@@ -27,15 +27,11 @@ const initialState: TState = {
   error: null,
 };
 
-
-
-
 // Slice
 const brandSlice = createSlice({
   name: "brands",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllBrands.pending, (state) => {
       state.isLoading = "Pending";
@@ -46,7 +42,20 @@ const brandSlice = createSlice({
       state.error = null;
       state.brands = action.payload;
     });
-    builder.addCase(getAllBrands.rejected, (state,action) => {
+    builder.addCase(getAllBrands.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload as string;
+    });
+    builder.addCase(getBrandsSearch.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(getBrandsSearch.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.brands = action.payload;
+    });
+    builder.addCase(getBrandsSearch.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -59,7 +68,7 @@ const brandSlice = createSlice({
       state.error = null;
       state.brands.push(action.payload);
     });
-    builder.addCase(addBrand.rejected, (state,action) => {
+    builder.addCase(addBrand.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -74,7 +83,7 @@ const brandSlice = createSlice({
         record._id === action.payload._id ? action.payload : record
       );
     });
-    builder.addCase(updateBrand.rejected, (state,action) => {
+    builder.addCase(updateBrand.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -85,15 +94,15 @@ const brandSlice = createSlice({
     builder.addCase(deleteBrand.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.brands=state.brands.filter((item)=>item._id!==action.payload);
+      state.brands = state.brands.filter((item) => item._id !== action.payload);
     });
-    builder.addCase(deleteBrand.rejected, (state,action) => {
+    builder.addCase(deleteBrand.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
-  }
+  },
 });
 
 export default brandSlice.reducer;
 
-export { getAllBrands,addBrand,updateBrand,deleteBrand };
+export { getAllBrands, addBrand, updateBrand, deleteBrand,getBrandsSearch };

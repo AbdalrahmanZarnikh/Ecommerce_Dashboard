@@ -1,17 +1,17 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-// Thunks 
-import addCategory from "./act/addCategory"
-import deleteCategory from "./act/deleteCategory"
-import getAllCategories from "./act/getAllCategories"
-import  updateCategory from "./act/updateCategory"
+// Thunks
+import addCategory from "./act/addCategory";
+import deleteCategory from "./act/deleteCategory";
+import getAllCategories from "./act/getAllCategories";
+import updateCategory from "./act/updateCategory";
+import getCategoriesSearch from "./act/getCategoriesSearch";
 
 // Types
 export interface TRecord {
   _id?: string;
   name: string;
-  image?: {url:string,public_id:string};
+  image?: { url: string; public_id: string };
 }
 
 type TState = {
@@ -27,15 +27,11 @@ const initialState: TState = {
   error: null,
 };
 
-
-
-
 // Slice
 const categorySlice = createSlice({
   name: "categories",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllCategories.pending, (state) => {
       state.isLoading = "Pending";
@@ -46,7 +42,20 @@ const categorySlice = createSlice({
       state.error = null;
       state.categories = action.payload;
     });
-    builder.addCase(getAllCategories.rejected, (state,action) => {
+    builder.addCase(getAllCategories.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload as string;
+    });
+    builder.addCase(getCategoriesSearch.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(getCategoriesSearch.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.categories = action.payload;
+    });
+    builder.addCase(getCategoriesSearch.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -59,7 +68,7 @@ const categorySlice = createSlice({
       state.error = null;
       state.categories.push(action.payload);
     });
-    builder.addCase(addCategory.rejected, (state,action) => {
+    builder.addCase(addCategory.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -74,7 +83,7 @@ const categorySlice = createSlice({
         record._id === action.payload._id ? action.payload : record
       );
     });
-    builder.addCase(updateCategory.rejected, (state,action) => {
+    builder.addCase(updateCategory.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -85,15 +94,17 @@ const categorySlice = createSlice({
     builder.addCase(deleteCategory.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.categories=state.categories.filter((item)=>item._id!==action.payload);
+      state.categories = state.categories.filter(
+        (item) => item._id !== action.payload
+      );
     });
-    builder.addCase(deleteCategory.rejected, (state,action) => {
+    builder.addCase(deleteCategory.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
-  }
+  },
 });
 
 export default categorySlice.reducer;
 
-export { getAllCategories,addCategory,updateCategory,deleteCategory };
+export { getAllCategories, addCategory, updateCategory, deleteCategory,getCategoriesSearch };

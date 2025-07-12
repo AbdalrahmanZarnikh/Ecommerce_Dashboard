@@ -1,19 +1,18 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-// Thunks 
+// Thunks
 import addCoupon from "./act/addCoupon";
 import getAllCoupons from "./act/getCoupons";
 import updateCoupon from "./act/updateCoupon";
 import deleteCoupon from "./act/deleteCoupon";
+import getCouponsSearch from "./act/getCouponsSearch";
 
 // Types
 export interface TRecord {
   _id?: string;
   name: string;
-  expire:string;
-  discount:number,
-
+  expire: string;
+  discount: number;
 }
 
 type TState = {
@@ -29,15 +28,11 @@ const initialState: TState = {
   error: null,
 };
 
-
-
-
 // Slice
 const couponSlice = createSlice({
   name: "coupons",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllCoupons.pending, (state) => {
       state.isLoading = "Pending";
@@ -48,7 +43,20 @@ const couponSlice = createSlice({
       state.error = null;
       state.records = action.payload;
     });
-    builder.addCase(getAllCoupons.rejected, (state,action) => {
+    builder.addCase(getAllCoupons.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload as string;
+    });
+    builder.addCase(getCouponsSearch.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(getCouponsSearch.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.records = action.payload;
+    });
+    builder.addCase(getCouponsSearch.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -61,7 +69,7 @@ const couponSlice = createSlice({
       state.error = null;
       state.records.push(action.payload);
     });
-    builder.addCase(addCoupon.rejected, (state,action) => {
+    builder.addCase(addCoupon.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -76,7 +84,7 @@ const couponSlice = createSlice({
         record._id === action.payload._id ? action.payload : record
       );
     });
-    builder.addCase(updateCoupon.rejected, (state,action) => {
+    builder.addCase(updateCoupon.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -87,15 +95,17 @@ const couponSlice = createSlice({
     builder.addCase(deleteCoupon.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records=state.records.filter((item)=>item._id!==action.payload);
+      state.records = state.records.filter(
+        (item) => item._id !== action.payload
+      );
     });
-    builder.addCase(deleteCoupon.rejected, (state,action) => {
+    builder.addCase(deleteCoupon.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
-  }
+  },
 });
 
 export default couponSlice.reducer;
 
-export { getAllCoupons,addCoupon,deleteCoupon,updateCoupon };
+export { getAllCoupons, addCoupon, deleteCoupon, updateCoupon ,getCouponsSearch};

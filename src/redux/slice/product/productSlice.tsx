@@ -1,25 +1,23 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-// Thunks 
-import addProduct from "./act/addProduct"
-import deleteProduct from "./act/deleteProduct"
-import getAllProducts from "./act/getAllProducts"
-import  updateProduct from "./act/updateProduct"
+// Thunks
+import addProduct from "./act/addProduct";
+import deleteProduct from "./act/deleteProduct";
+import getAllProducts from "./act/getAllProducts";
+import updateProduct from "./act/updateProduct";
+import getProductsSearch from "./act/getProductsSearch";
 
 // Types
 export interface TRecord {
   _id?: string;
   title: string;
-  image?: {url:string,public_id:string};
-  images?: {url:string,public_id:string}[] | undefined;
-  description?:string,
-  price:number,
-  category:{_id:string,name:string} | undefined
-  brand:{_id:string,name:string} | undefined
-  quantity:number
-  
-  
+  image?: { url: string; public_id: string };
+  images?: { url: string; public_id: string }[] | undefined;
+  description?: string;
+  price: number;
+  category: { _id: string; name: string } | undefined;
+  brand: { _id: string; name: string } | undefined;
+  quantity: number;
 }
 type TState = {
   records: TRecord[];
@@ -34,15 +32,11 @@ const initialState: TState = {
   error: null,
 };
 
-
-
-
 // Slice
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllProducts.pending, (state) => {
       state.isLoading = "Pending";
@@ -53,7 +47,20 @@ const productSlice = createSlice({
       state.error = null;
       state.records = action.payload;
     });
-    builder.addCase(getAllProducts.rejected, (state,action) => {
+    builder.addCase(getAllProducts.rejected, (state, action) => {
+      state.isLoading = "Fail";
+      state.error = action.payload as string;
+    });
+    builder.addCase(getProductsSearch.pending, (state) => {
+      state.isLoading = "Pending";
+      state.error = null;
+    });
+    builder.addCase(getProductsSearch.fulfilled, (state, action) => {
+      state.isLoading = "Success";
+      state.error = null;
+      state.records = action.payload;
+    });
+    builder.addCase(getProductsSearch.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -66,7 +73,7 @@ const productSlice = createSlice({
       state.error = null;
       state.records.push(action.payload);
     });
-    builder.addCase(addProduct.rejected, (state,action) => {
+    builder.addCase(addProduct.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -81,7 +88,7 @@ const productSlice = createSlice({
         record._id === action.payload._id ? action.payload : record
       );
     });
-    builder.addCase(updateProduct.rejected, (state,action) => {
+    builder.addCase(updateProduct.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
@@ -92,15 +99,17 @@ const productSlice = createSlice({
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.isLoading = "Success";
       state.error = null;
-      state.records=state.records.filter((item)=>item._id!==action.payload);
+      state.records = state.records.filter(
+        (item) => item._id !== action.payload
+      );
     });
-    builder.addCase(deleteProduct.rejected, (state,action) => {
+    builder.addCase(deleteProduct.rejected, (state, action) => {
       state.isLoading = "Fail";
       state.error = action.payload as string;
     });
-  }
+  },
 });
 
 export default productSlice.reducer;
 
-export { getAllProducts,addProduct,updateProduct,deleteProduct };
+export { getAllProducts, addProduct, updateProduct, deleteProduct ,getProductsSearch};

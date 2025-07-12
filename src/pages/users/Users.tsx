@@ -5,7 +5,7 @@ import UserCard from "../../components/UserCard/UserCard";
 
 // Thunks
 
-import { getAllUsers } from "../../redux/slice/users/userSlice";
+import { getAllUsers ,getUsersSearch } from "../../redux/slice/users/userSlice";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -28,7 +28,7 @@ const Users: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <MainContent status={isLoading} error={error} to="users">
+    <MainContent status={isLoading} error={error} to="users" getAll={getAllUsers} getBySearch={getUsersSearch}>
       <GridList
         records={records}
         renderItems={(record) => (

@@ -7,7 +7,7 @@ import MainContent from "../../components/common/MainContent/MainContent";
 
 // Thunks
 
-import { getAllOrders } from "../../redux/slice/orders/orderSlice";
+import { getAllOrders ,getOrdersSearch } from "../../redux/slice/orders/orderSlice";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -34,7 +34,7 @@ const Orders: React.FC = () => {
   return (
 
 
-    <MainContent status={isLoading} error={error} to="orders">
+    <MainContent status={isLoading} error={error} to="orders" getAll={getAllOrders} getBySearch={getOrdersSearch}>
       <div className="p-10 flex justify-start items-center gap-4 ">
         <button className={`text-3xl bg-red-500 hover:bg-red-300 text-white p-2 rounded-lg mb-4 cursor-pointer`} onClick={()=>{
           setSelectedFilter("all")

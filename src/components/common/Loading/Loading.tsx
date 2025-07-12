@@ -1,7 +1,8 @@
 import React from "react";
 import ButtonSpinner from "../../buttonSpinner/ButtonSpinner";
 import Lottie from "lottie-react";
-import Error from "./error.json"
+import Error from "./error.json";
+
 
 type TLoadingProps = {
   status: "Idle" | "Pending" | "Fail" | "Success";
@@ -9,6 +10,7 @@ type TLoadingProps = {
   children: React.ReactNode;
 };
 const Loading = ({ status, error, children }: TLoadingProps) => {
+
   // When isLoading is Pending Show ButtonSpinner Only
   if (status === "Pending") {
     return (
@@ -17,15 +19,20 @@ const Loading = ({ status, error, children }: TLoadingProps) => {
       </div>
     );
   }
-  if (status ==="Fail") {
+  if (status === "Fail") {
     return (
       <div className="flex justify-center items-center h-screen flex-col">
-      <Lottie animationData={Error} />
-      <h1 className="text-5xl text-red-600">{error}</h1>
-    </div>
+        <Lottie animationData={Error} />
+        <h1 className="text-5xl text-red-600">{error}</h1>
+      </div>
     );
   }
-  return <div>{children}</div>;
+  return (
+    <div>
+  
+      {children}
+    </div>
+  );
 };
 
 export default Loading;

@@ -5,7 +5,7 @@ import CategoryCard from "../../components/CategoryCard/CategoryCard";
 
 // Thunks
 
-import { getAllBrands,deleteBrand } from "../../redux/slice/brands/brandSlice";
+import { getAllBrands,deleteBrand,getBrandsSearch } from "../../redux/slice/brands/brandSlice";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -28,7 +28,7 @@ const Categories: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <MainContent status={isLoading} error={error} to="brands">
+    <MainContent status={isLoading} error={error} to="brands" getAll={getAllBrands} getBySearch={getBrandsSearch}>
       <GridList
         records={brands}
         renderItems={(record) => (

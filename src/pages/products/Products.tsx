@@ -7,7 +7,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 
 // Thunks
 
-import { getAllProducts } from "../../redux/slice/product/productSlice";
+import { getAllProducts ,getProductsSearch } from "../../redux/slice/product/productSlice";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -32,7 +32,7 @@ const Products: React.FC = () => {
   return (
 
 
-    <MainContent status={isLoading} error={error} to="products">
+    <MainContent status={isLoading} error={error} to="products" getAll={getAllProducts} getBySearch={getProductsSearch}>
       <GridList
         records={records}
         renderItems={(record) => (
