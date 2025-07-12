@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {deleteCoupon,updateCoupon} from "../../redux/slice/coupons/couponSlice"
+import {deleteCoupon} from "../../redux/slice/coupons/couponSlice"
 
 
 // Component

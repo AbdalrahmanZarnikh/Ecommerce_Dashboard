@@ -21,7 +21,6 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 // React-Hot-Toast
 import toast from "react-hot-toast";
 import Loading from "../../common/Loading/Loading";
-import UploadImage from "../../common/uploadImage/UploadImage";
 
 // Types
 type Inputs = {

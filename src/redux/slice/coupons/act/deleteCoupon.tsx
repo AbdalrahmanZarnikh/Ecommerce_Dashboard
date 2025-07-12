@@ -8,13 +8,15 @@ const deleteCoupon = createAsyncThunk(
       const { rejectWithValue } = thunkAPI;
       try {
         const token=localStorage.getItem("token");
-        const res = await axios.delete(
+        await axios.delete(
           `/api/coupons/${id}`,{
             headers:{
               Authorization:`Bearer ${token}`
             }
           }
         );
+
+
          
         toast.success("coupon deleted successfully")
         return id;

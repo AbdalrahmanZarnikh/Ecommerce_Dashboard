@@ -35,6 +35,8 @@ type Inputs = {
   brand: string;
   description: string;
   quantity: number;
+  priceAfterDiscount?:number;
+  colors?:[string]
 };
 
 type Category = { _id: string; name: string };
@@ -109,6 +111,7 @@ const ProductForm: React.FC = () => {
       form.append("brand", data.brand);
     }
     form.append("price", data.price.toString());
+    form.append("priceAfterDiscount", data.priceAfterDiscount!.toString());
     form.append("quantity", data.quantity.toString());
 
     const action = isUpdateMode
@@ -143,21 +146,21 @@ const ProductForm: React.FC = () => {
             <span className="text-red-400">{errors.title.message}</span>
           )}
         </div>
-        <div className="form-group">
-          <label htmlFor="Description">الوصف </label>
-          <input
-            id="Description"
-            type="text"
-            placeholder="ادخل وصف ...."
+        <div className="form-group full-width">
+          <label htmlFor="description">الوصف</label>
+          <textarea
+            id="description"
+            placeholder="ادخل وصف للمنتج ..."
+            rows={4}
             {...register("description", {
-              required: "The Description is Required",
-              minLength:15
+              minLength: { value: 10, message: "Too Short Description" },
             })}
-          />
+          ></textarea>
           {errors.description && (
             <span className="text-red-400">{errors.description.message}</span>
           )}
         </div>
+
         <div className="form-group">
           <label htmlFor="Price">السعر</label>
           <input
@@ -171,6 +174,21 @@ const ProductForm: React.FC = () => {
           />
           {errors.price && (
             <span className="text-red-400">{errors.price.message}</span>
+          )}
+        </div>
+            <div className="form-group">
+          <label htmlFor="PriceAfterDiscount">السعر بعد الخصم</label>
+          <input
+            id="PriceAfterDiscount"
+            type="number"
+            min={"0"}
+            placeholder="ادخل سعر ..."
+            {...register("priceAfterDiscount", {
+              required: "The Price is Required",
+            })}
+          />
+          {errors.priceAfterDiscount && (
+            <span className="text-red-400">{errors.priceAfterDiscount.message}</span>
           )}
         </div>
         <div className="form-group">
