@@ -183,9 +183,7 @@ const ProductForm: React.FC = () => {
             type="number"
             min={"0"}
             placeholder="ادخل سعر ..."
-            {...register("priceAfterDiscount", {
-              required: "The Price is Required",
-            })}
+            {...register("priceAfterDiscount")}
           />
           {errors.priceAfterDiscount && (
             <span className="text-red-400">{errors.priceAfterDiscount.message}</span>
