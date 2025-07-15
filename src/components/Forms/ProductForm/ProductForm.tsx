@@ -107,11 +107,13 @@ const ProductForm: React.FC = () => {
     form.append("title", data.title);
     form.append("description", data.description);
     form.append("category", data.category);
-    if (brands.length > 0) {
+    if (brands.length > 0 && data.brand!=="") {
       form.append("brand", data.brand);
     }
     form.append("price", data.price.toString());
-    form.append("priceAfterDiscount", data.priceAfterDiscount!.toString());
+    if(data.priceAfterDiscount?.toString() !==""){
+      form.append("priceAfterDiscount", data.priceAfterDiscount!.toString());
+    }
     form.append("quantity", data.quantity.toString());
 
     const action = isUpdateMode
