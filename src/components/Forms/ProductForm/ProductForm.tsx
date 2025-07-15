@@ -226,7 +226,7 @@ const ProductForm: React.FC = () => {
             <label htmlFor="Brand">الماركة</label>
             <select
               id="Brand"
-              {...register("brand", { required: " brand required" })}
+              {...register("brand")}
             >
               <option value="">اختر الماركة</option>
               {brands.map((bra) => (
