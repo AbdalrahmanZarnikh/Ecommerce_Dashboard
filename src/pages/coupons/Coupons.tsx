@@ -22,7 +22,7 @@ const Coupons: React.FC = () => {
     (state) => state.couponSlice
   );
 
-  // For Fetching All Categories From Slice
+  // For Fetching All  From Slice
   useEffect(() => {
     dispatch(getAllCoupons());
   }, [dispatch]);

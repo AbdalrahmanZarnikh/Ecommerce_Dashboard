@@ -22,7 +22,7 @@ const Categories: React.FC = () => {
     (state) => state.brandSlice
   );
 
-  // For Fetching All Categories From Slice
+  // For Fetching All  From Slice
   useEffect(() => {
     dispatch(getAllBrands());
   }, [dispatch]);

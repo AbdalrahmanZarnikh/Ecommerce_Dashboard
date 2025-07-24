@@ -2,11 +2,9 @@
 import styles from "../../styles";
 
 // Router-Dom
-import { useNavigate } from "react-router-dom";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {deleteCoupon} from "../../redux/slice/coupons/couponSlice"
 
 
 // Component
@@ -17,22 +15,20 @@ import { useState } from "react";
 
 //React-Hot-Toast
 import toast from "react-hot-toast";
-import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { deleteMessage } from "../../redux/slice/messages/messageSlice";
 
 // Types
-interface CouponCardProps {
+interface MessageCardProps {
   name?: string;
   id?: string;
-  expire: string;
-  discount: number;
+  message:string
 }
 
-const CouponCard: React.FC<CouponCardProps> = ({
+const MessageCard: React.FC<MessageCardProps> = ({
   name,
   id,
-  expire,
-  discount,
+  message,
 }) => {
   // State For Modal To Open And Close
   const [open, setOpen] = useState(false);
@@ -41,16 +37,11 @@ const CouponCard: React.FC<CouponCardProps> = ({
   const { error } = useAppSelector((state) => state.categorySlice);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
-  // Function To Handle Navigation To Update Page
-  const handleClickUpdate = () => {
-    navigate(`/coupons/update/${id}`);
-  };
 
   // Function To Handle Delete Item
   const handleClickDelete = () => {
-    dispatch(deleteCoupon(id as string));
+    dispatch(deleteMessage(id as string));
     if (!error) {
       toast.success("item deleted successfully");
     } else {
@@ -64,12 +55,6 @@ const CouponCard: React.FC<CouponCardProps> = ({
     >
       <div className="flex justify-end items-center  gap-3 mb-2">
         <button
-          className="text-2xl  text-white hover:bg-red-400 bg-[#FF8D4C] p-2 rounded-lg"
-          onClick={handleClickUpdate}
-        >
-          <MdEdit />
-        </button>
-        <button
           onClick={() => {
             setOpen(true);
           }}
@@ -80,15 +65,15 @@ const CouponCard: React.FC<CouponCardProps> = ({
       </div>
       <div className="profile text-center flex flex-col">
         <span className="text-Grey_15 fontA-semibold md:text-[24px] text-[20px]">
-           اسم الكوبون : {name}
+            اسم المرسل  : {name}
         </span>
         <span className="text-Grey_15 font-semibold md:text-[24px] text-[20px]">
-           مدة الكوبون : <span className="text-sm md:text-xl">{expire}</span>
+            نص الرسالة : <span className="text-sm md:text-xl">{message}</span>
         </span>
 
-        <span className="text-Grey_15 font-semibold md:text-[24px] text-[20px]">
+        {/* <span className="text-Grey_15 font-semibold md:text-[24px] text-[20px]">
           قيمة الخصم : {discount}
-        </span>
+        </span> */}
       </div>
 
       {/* Modal Component To Show When Click On Delete Button */}
@@ -101,4 +86,4 @@ const CouponCard: React.FC<CouponCardProps> = ({
   );
 };
 
-export default CouponCard;
+export default MessageCard;

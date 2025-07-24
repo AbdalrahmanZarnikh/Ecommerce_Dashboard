@@ -9,6 +9,7 @@ import userSlice from "../slice/users/userSlice"
 import productSlice from "../slice/product/productSlice"
 import orderSlice from "../slice/orders/orderSlice"
 import couponSlice from "../slice/coupons/couponSlice"
+import messageSlice from "../slice/messages/messageSlice"
 
 export const store = configureStore({
   reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
     userSlice,
     productSlice,
     orderSlice,
-    couponSlice
+    couponSlice,
+    messageSlice
   },
 });
 

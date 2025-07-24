@@ -14,6 +14,7 @@ import UserForm from "./components/Forms/UserForm/UserForm";
 import ProductForm from "./components/Forms/ProductForm/ProductForm";
 import ProtectedRoute from "./services/ProtectedRoute";
 import CouponForm from "./components/Forms/CouponForm/CouponForm";
+import Messages from "./pages/messages/Messages";
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
           {DashBoardLinks.map((ele) => {
             return <Route path={ele.path} element={ele.childComponente} />;
           })}
+          <Route path="/messages" element={<Messages/>}/>
           <Route
             path="/categories/add"
             element={

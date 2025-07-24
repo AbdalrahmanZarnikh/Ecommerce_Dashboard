@@ -15,7 +15,7 @@ const NewItem:React.FC<TProps> = ({children}) => {
   const navigate=useNavigate();
   // Function To Handle Back Button
   const clickedHandler=()=>{
-    navigate(-1); 
+    navigate(".."); 
   }
   return (
     <div className="p-11">
