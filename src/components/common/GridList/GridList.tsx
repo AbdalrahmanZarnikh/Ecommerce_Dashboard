@@ -22,8 +22,8 @@ const GridList = <T,>({ records, renderItems, grid }: TGridListProps<T>) => {
     ) : (
       <Lottie
         animationData={notfound}
-        style={{ width: "400px" }}
-        className="m-auto mt-10 "
+        // style={{ width: `200px` }}
+        className="m-auto mt-10 w-52 md:w-96 "
       />
     );
   return (

@@ -50,9 +50,9 @@ const MainContent = ({ status, error, children, to,getBySearch,getAll }: TProps)
       </div>
       <Loading status={status} error={error}>
         {to === "orders" ? null : (
-          <div className="p-11">
+          <div className={`p-11 ${to=="messages" && "hidden"}`}>
             <button
-              className={`${styles.btn} mb-4`}
+              className={`${styles.btn} mb-4 `}
               onClick={() => {
                 navigate(`/${to}/add`);
               }}
